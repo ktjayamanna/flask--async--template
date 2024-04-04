@@ -1,0 +1,5 @@
+Flask
+gunicorn
+celery[sqs]
+boto3
+python-dotenv
