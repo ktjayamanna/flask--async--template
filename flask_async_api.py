@@ -31,7 +31,7 @@ s3 = boto3.client('s3', aws_access_key_id=aws_access_key_id,
                              aws_secret_access_key=aws_secret_access_key)
 
 # Define a Celery task
-@celery.task(bind=True)
+@celery.task(bind=True, name='flask_async_api.add')
 def add(self, x, y):
     result = x + y
     result_data = json.dumps({'result': result})
