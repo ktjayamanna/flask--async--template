@@ -1,8 +1,11 @@
-# Relative path: config.py
+from dotenv import load_dotenv
 import os
 
-class Config:
-    BROKER_URL = os.getenv("BROKER_URL")
-    AWS_ACCESS_KEY_ID = os.getenv('MIN_PYRO_USER_AWS_ACCESS_KEY')
-    AWS_SECRET_ACCESS_KEY = os.getenv('MIN_PYRO_USER_AWS_SECRET_KEY')
-    S3_BUCKET_NAME = 'workingdir--storage'
+dotenv_path = os.path.join(os.path.dirname(__file__), '.devcontainer', '.env')
+load_dotenv(dotenv_path)
+
+CELERY_BROKER_URL = os.getenv("BROKER_URL")
+CELERY_RESULT_BACKEND = None  # Specify if you have a result backend
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
