@@ -1,25 +1,24 @@
 from celery import Celery
 import json
-from config import *
 from business_logic import perform_addition
 from utils import upload_to_s3
+from config import Config
 
-# Initialize Celery
-celery = Celery('tasks', broker=CELERY_BROKER_URL)
+config = Config()
+
+celery = Celery('tasks', broker=config.CELERY_BROKER_URL)
 celery.conf.update(
-    CELERY_ACCEPT_CONTENT=CELERY_ACCEPT_CONTENT,
-    CELERY_TASK_SERIALIZER=CELERY_TASK_SERIALIZER,
-    CELERY_RESULT_SERIALIZER=CELERY_RESULT_SERIALIZER,
+    CELERY_ACCEPT_CONTENT=config.CELERY_ACCEPT_CONTENT,
+    CELERY_TASK_SERIALIZER=config.CELERY_TASK_SERIALIZER,
+    CELERY_RESULT_SERIALIZER=config.CELERY_RESULT_SERIALIZER,
 )
 
 @celery.task(bind=True)
 def add(self, x, y):
-    print("Hiiii mom!!!!")
     result = perform_addition(x, y)
     result_data = json.dumps({'result': result})
     
     # Generate an object key for the S3 bucket
-    print("Work is done now", self.request.id)
     object_key = f"tests/{self.request.id}.json"
     bucket_name = 'workingdir--storage'
     

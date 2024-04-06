@@ -2,16 +2,20 @@ import boto3
 import os
 from botocore.exceptions import NoCredentialsError, ClientError
 from dotenv import load_dotenv
+from config import Config
 
 dotenv_path = os.path.join(os.path.dirname(__file__), '.devcontainer', '.env')
 load_dotenv(dotenv_path)
+
+# Instantiate the Config object
+config = Config()
 
 def get_s3_client():
     """Initializes and returns a Boto3 S3 client using credentials from environment variables."""
     s3 = boto3.client(
         's3',
-        aws_access_key_id=os.getenv('MIN_PYRO_USER_AWS_ACCESS_KEY'),
-        aws_secret_access_key=os.getenv('MIN_PYRO_USER_AWS_SECRET_KEY')
+        aws_access_key_id= config.MIN_PYRO_USER_AWS_ACCESS_KEY,
+        aws_secret_access_key=config.MIN_PYRO_USER_AWS_SECRET_KEY
     )
     return s3
 
