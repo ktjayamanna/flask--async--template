@@ -6,11 +6,11 @@ from config import Config
 
 config = Config()
 
-celery = Celery('tasks', broker=config.CELERY_BROKER_URL)
+celery = Celery('tasks', broker=config.broker_url)
 celery.conf.update(
-    CELERY_ACCEPT_CONTENT=config.CELERY_ACCEPT_CONTENT,
-    CELERY_TASK_SERIALIZER=config.CELERY_TASK_SERIALIZER,
-    CELERY_RESULT_SERIALIZER=config.CELERY_RESULT_SERIALIZER,
+    accept_content=config.accept_content,
+    task_serializer = config.task_serializer,
+    result_serializer = config.result_serializer
 )
 
 @celery.task(bind=True)
