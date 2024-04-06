@@ -6,24 +6,18 @@ from dotenv import load_dotenv
 dotenv_path = os.path.join(os.path.dirname(__file__), '.devcontainer', '.env')
 load_dotenv(dotenv_path)
 
-# def get_s3_client():
-#     """Initializes and returns a Boto3 S3 client using credentials from environment variables."""
-#     s3 = boto3.client(
-#         's3',
-#         aws_access_key_id=os.getenv('MIN_PYRO_USER_AWS_ACCESS_KEY'),
-#         aws_secret_access_key=os.getenv('MIN_PYRO_USER_AWS_SECRET_KEY')
-#     )
-#     return s3
-
-def upload_to_s3(bucket_name, object_key, data):
-    """Uploads data to an S3 bucket and returns the S3 object URL or an error message."""
+def get_s3_client():
+    """Initializes and returns a Boto3 S3 client using credentials from environment variables."""
     s3 = boto3.client(
         's3',
         aws_access_key_id=os.getenv('MIN_PYRO_USER_AWS_ACCESS_KEY'),
         aws_secret_access_key=os.getenv('MIN_PYRO_USER_AWS_SECRET_KEY')
     )
-    print(os.getenv('MIN_PYRO_USER_AWS_ACCESS_KEY'))
-    
+    return s3
+
+def upload_to_s3(bucket_name, object_key, data):
+    """Uploads data to an S3 bucket and returns the S3 object URL or an error message."""
+    s3 = get_s3_client()
     try:
         response = s3.put_object(Bucket=bucket_name, Key=object_key, Body=data)
         return f"s3://{bucket_name}/{object_key}"
