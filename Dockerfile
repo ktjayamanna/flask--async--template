@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y \
     automake \
     libtool \
     tar \
-    curl 
+    curl \
+    tree
 
 # Set work directory
 WORKDIR /code
