@@ -4,7 +4,7 @@
 URL="http://localhost:5000/add"
 
 # JSON payload
-PAYLOAD='{"x": 15, "y": 10}'
+PAYLOAD='{"x": 25, "y": 10}'
 
 # Send POST request
 curl -X POST "$URL" -H "Content-Type: application/json" -d "$PAYLOAD"
