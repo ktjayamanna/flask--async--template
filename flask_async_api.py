@@ -36,5 +36,5 @@ def divide():
         return jsonify({'error': 'Please provide both "x" and "y" values.'}), 400
     return jsonify({'result': result}), 200
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)

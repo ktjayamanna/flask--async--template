@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Endpoint URL for division
-URL="http://localhost:5000/divide"
+URL="http://localhost:8000/divide"
 
 # JSON payload for division
 PAYLOAD='{"x": 20, "y": 5}'

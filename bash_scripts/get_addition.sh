@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Endpoint URL
-URL="http://localhost:5000/add"
+URL="http://localhost:8000/add"
 
 # JSON payload
 PAYLOAD='{"x": 25, "y": 10}'
